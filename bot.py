@@ -18,15 +18,23 @@ async def joe(ctx, arg):
 	for i in results.json()["results"]:
 		embed=discord.Embed(title=f'{i["title"]}', url=f'{i["url"]}', description=f'{i["synopsis"]}', color=0x5800db)
 		embed.set_image(url=f'{i["image_url"]}')
-		await ctx.send(embed=embed)
+		msg = await ctx.send(embed=embed)
+		await message.add_reaction(msg, emoji='🏃')
 
 @bot.command(name="manga")
 async def joe(ctx, arg):
 	argument = str(arg)
-	results = requests.get(f"https://api.jikan.moe/v3/search/manga?q={argument}&limit=1")
+	results = requests.get(f"https://api.jikan.moe/v3/search/manga?q={argument}&limit=2")
 	for i in results.json()["results"]:
 		embed=discord.Embed(title=f'{i["title"]}', url=f'{i["url"]}', description=f'{i["synopsis"]}', color=0x5800db)
 		embed.set_image(url=f'{i["image_url"]}')
-		await ctx.send(embed=embed)
+		msg = await ctx.send(embed=embed)
+		await msg.add_reaction('🏃')		
 
-bot.run('#CLIENTID')
+@bot.event
+async def on_reaction_add(reaction, user):
+	if reaction.emoji == "🏃":
+		message = reaction.message
+		await message.edit(embed="Changed")
+
+bot.run('ODI4NDcxMzE3Nzc4MTM3MTIw.YGqECg.3Vx8kNKpZ5dk96dgbds_ET9WECQ')
