@@ -37,4 +37,4 @@ async def on_reaction_add(reaction, user):
 		message = reaction.message
 		await message.edit(embed="Changed")
 
-bot.run('ODI4NDcxMzE3Nzc4MTM3MTIw.YGqECg.3Vx8kNKpZ5dk96dgbds_ET9WECQ')
+bot.run('#')
